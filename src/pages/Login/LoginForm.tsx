@@ -3,6 +3,7 @@ import "./styles.scss";
 import Input from "../../components/Input";
 import { UserContext } from "../../store/user";
 import { useNavigate } from "react-router-dom";
+import { loginApi } from "../../services/loginService";
 
 export function LoginForm() {
 	const userStore = useContext(UserContext);
@@ -11,6 +12,8 @@ export function LoginForm() {
 		username: "",
 		password: "",
 	});
+	const [loading, setLoading] = useState(false);
+	const [loginError, setLoginError] = useState("");
 
 	const handleChange = (e: any) => {
 		const value = e.target.value;
@@ -23,9 +26,18 @@ export function LoginForm() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(formData, "--");
-		await userStore.signIn(formData.username, formData.password);
-		navigate("/");
+		const [res, error] = await loginApi({
+			email: formData.username,
+			password: formData.password,
+		});
+		if (error) {
+			setLoginError(error);
+			setLoading(false);
+		} else {
+			setLoading(true);
+			userStore.signIn(formData.username, res.token);
+			navigate("/");
+		}
 	};
 
 	return (
@@ -46,7 +58,12 @@ export function LoginForm() {
 				required
 				onChange={handleChange}
 			/>
-			<button type="submit" className="btn-block">
+			{loginError !== "" && (
+				<>
+					<div className="login-error">{loginError}</div>
+				</>
+			)}
+			<button type="submit" className="btn-block" disabled={loading}>
 				LOGIN
 			</button>
 		</form>

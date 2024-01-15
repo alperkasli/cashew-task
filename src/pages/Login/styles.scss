@@ -44,3 +44,10 @@
 	width: 100%;
 	padding: 15px;
 }
+
+.login-error {
+	border: solid 1px $error-color;
+	color: $error-color;
+	padding: 25px;
+	font-size: 14px;
+}

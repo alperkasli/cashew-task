@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { loginApi } from "../services/loginService";
 
 export interface IUser {
 	username: string;
@@ -8,7 +7,7 @@ export interface IUser {
 
 interface UserContextType {
 	user: IUser | null;
-	signIn: (username: string, password: string) => void;
+	signIn: (username: string, token: string) => void;
 	signOut: () => void;
 }
 
@@ -17,10 +16,8 @@ export const UserContext = createContext<UserContextType>(null!);
 export function UserProvider({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<IUser | null>(null);
 
-	const signIn = async (username: string, password: string) => {
-		const res = await loginApi({ email: username, password });
-		console.log(res, "res---");
-		setUser({ username, token: res.token });
+	const signIn = async (username: string, token: string) => {
+		setUser({ username, token });
 	};
 
 	const signOut = () => {
