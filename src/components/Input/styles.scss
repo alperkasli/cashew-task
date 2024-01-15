@@ -1,0 +1,13 @@
+.form-group {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	margin-top: 35px;
+
+	.input {
+		padding: 10px;
+	}
+    .label {
+        font-size: 22px;
+    }
+}

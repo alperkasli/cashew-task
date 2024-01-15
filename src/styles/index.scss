@@ -17,3 +17,34 @@ body {
 	overflow: hidden;
 	background: #ece9e6;
 }
+
+.page {
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+.flex {
+	display: flex;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}

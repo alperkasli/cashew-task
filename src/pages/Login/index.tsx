@@ -1,21 +1,14 @@
-import React, { useContext } from "react";
-import { UserContext } from "../../store/user";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import "./styles.scss";
+import { LoginForm } from "./LoginForm";
 
 export function Login() {
-	const userCtx = useContext(UserContext);
-	const navigate = useNavigate();
-	const handleLogin = () => {
-		userCtx.signIn("test", "test");
-		navigate("/");
-	};
 	return (
-		<div>
-			login page
-			<button className="button" onClick={handleLogin}>
-				testlogin
-			</button>
+		<div className="page container">
+			<div className="login-wrapper">
+				<h2>LOGIN</h2>
+				<LoginForm />
+			</div>
 		</div>
 	);
 }
