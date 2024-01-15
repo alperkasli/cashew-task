@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export interface IUser {
 	username: string;
@@ -18,11 +18,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
 	const signIn = (username: string, token: string) => {
 		setUser({ username, token });
+		localStorage.setItem("user", JSON.stringify({ username, token }));
 	};
 
 	const signOut = () => {
 		setUser(null);
+		localStorage.removeItem("user");
 	};
+
+	useEffect(() => {
+		const localUser = localStorage.getItem("user");
+		if (localUser) {
+			setUser(JSON.parse(localUser));
+		}
+	}, []);
 
 	return (
 		<UserContext.Provider value={{ user, signIn, signOut }}>
