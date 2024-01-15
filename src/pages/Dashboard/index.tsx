@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../store/user";
 
 export function Dashboard() {
-	return <div>dashboard page</div>;
+	const userStore = useContext(UserContext);
+	return (
+		<div className="page container">Welcome {userStore.user?.username}</div>
+	);
 }
