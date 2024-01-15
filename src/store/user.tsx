@@ -1,8 +1,9 @@
 import React, { createContext, useState } from "react";
+import { loginApi } from "../services/loginService";
 
-interface IUser {
+export interface IUser {
 	username: string;
-	email: string;
+	token: string;
 }
 
 interface UserContextType {
@@ -16,9 +17,10 @@ export const UserContext = createContext<UserContextType>(null!);
 export function UserProvider({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<IUser | null>(null);
 
-	const signIn = (username: string, password: string) => {
-		// make call and set user
-		setUser({ username: "test", email: "test" });
+	const signIn = async (username: string, password: string) => {
+		const res = await loginApi({ email: username, password });
+		console.log(res, "res---");
+		setUser({ username, token: res.token });
 	};
 
 	const signOut = () => {
