@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../store/user";
 import { useNavigate } from "react-router-dom";
+import "./styles.scss";
 
 export function Login() {
 	const userCtx = useContext(UserContext);
@@ -12,7 +13,9 @@ export function Login() {
 	return (
 		<div>
 			login page
-			<button onClick={handleLogin}>testlogin</button>
+			<button className="button" onClick={handleLogin}>
+				testlogin
+			</button>
 		</div>
 	);
 }

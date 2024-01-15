@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.button {
+	display: inline-block;
+	width: 100%;
+	color: $primary-color;
+	background: white;
+
+	&:hover {
+		background: rgb(231, 229, 229);
+		transition: all 0.2s linear;
+	}
+}
